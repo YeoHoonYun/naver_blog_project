@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_socketio import SocketIO
-import time
+from chat_test import word_anal
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'vnkdjnfjknfl1232#'
@@ -8,7 +8,6 @@ socketio = SocketIO(app)
 
 @app.route('/')
 def sessions():
-    socketio.emit('my response', "test", callback=messageReceived)
     return render_template('session.html')
 
 def messageReceived(methods=['GET', 'POST']):
@@ -17,6 +16,11 @@ def messageReceived(methods=['GET', 'POST']):
 @socketio.on('my event')
 def handle_my_custom_event(json, methods=['GET', 'POST']):
     print('received my event: ' + str(json))
+    word = json.get("message")
+    res = word_anal(word, "testYun")
+    print(res)
+    json['user_name'] = "testYun"
+    json['message'] = res['message']
     socketio.emit('my response', json, callback=messageReceived)
 if __name__ == '__main__':
     socketio.run(app, debug=True)

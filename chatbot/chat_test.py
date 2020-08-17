@@ -25,10 +25,11 @@ def word_anal(word,body):
     try:
         for function in result.get("functions"):
             print("실행한 명령 : ", function)
-        return result["type"]
+        return result
     except:
         print("등록되지 않은 명령입니다. 선택할 명령을 다시 말해주세요..")
-        return "None Type"
+        result["message"] = "등록되지 않은 명령입니다. 곧 추가하겠습니다."
+        return result
 
 if __name__ == '__main__':
     result = {}

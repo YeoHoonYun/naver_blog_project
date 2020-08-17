@@ -31,6 +31,7 @@ class word_class:
         return {
             ('안녕하세요', 'NNP'): {
                 "functions": self.hello(),
+                "message" : "Hello",
                 "type": "인사"
             },
             ("?","SF") : {
@@ -38,6 +39,7 @@ class word_class:
                     ('잘', 'MAG') : {
                         ('실행', 'NNP') : {
                             "functions": self.ok(),
+                            "message": "잘 실행되었습니다.",
                             "type": "긍정"
                         }
                     }
@@ -46,6 +48,7 @@ class word_class:
                     ('잘', 'MAG'): {
                         ('실행', 'NNG'): {
                             "functions": self.ok(),
+                            "message": "잘 실행되었습니다.",
                             "type": "긍정"
                         }
                     }
@@ -55,12 +58,14 @@ class word_class:
                 ('수면', 'NNP') : {
                     ('실행', 'NNP') : {
                         "functions": self.sumeon(),
+                        "message": "수면모드를 실행합니다.",
                         "type": "모드실행"
                     }
                 },
                 ('외출', 'NNP'): {
                     ('실행', 'NNP'): {
                         "functions": self.sumeon(),
+                        "message": "외출모드를 실행합니다.",
                         "type": "모드실행"
                     }
                 }
