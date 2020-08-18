@@ -1,3 +1,6 @@
+import json
+
+import requests
 from PyKomoran import *
 import word_dict
 
@@ -6,6 +9,12 @@ komoran = Komoran("EXP")
 result = {}
 word_dict = word_dict.word_class()
 check_list = word_dict.word_dic
+
+base_url = "http://192.168.0.104:8123/api"
+headers = {
+  'Content-Type': 'application/json',
+  'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI0NzY3YjJiNTQzMzc0MDAxYTg5YzUxMGY5ZjkzOTA5OSIsImlhdCI6MTU5NTk0MDY0MiwiZXhwIjoxOTExMzAwNjQyfQ.YabgBIupXkI5AV-1pSj4WtUS94YoOG_XzS6ysK50kGA'
+}
 
 def deep_word(dic, word):
     global result
@@ -25,6 +34,12 @@ def word_anal(word,body):
     try:
         for function in result.get("functions"):
             print("실행한 명령 : ", function)
+            url = base_url+function[0]
+            payload = json.dumps({
+                "entity_id" : function[1]
+            })
+            response = requests.request("POST", url, headers=headers, data=payload)
+            print(response.text.encode('utf8'))
         return result
     except:
         print("등록되지 않은 명령입니다. 선택할 명령을 다시 말해주세요..")

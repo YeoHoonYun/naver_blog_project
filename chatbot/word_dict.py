@@ -6,25 +6,19 @@ class word_class:
 
     def hello(self):
         command_list = []
-        command_list.append("Hello!")
         return command_list
 
     def ok(self):
         command_list = []
-        command_list.append("잘 됩니다. 걱정하지마세요.")
         return command_list
 
     def sumeon(self):
         command_list = []
-        command_list.append("수면모드를 실행합니다.")
-        command_list.append("전등을 끕니다.")
-        command_list.append("청소기를 끕니다.")
+        command_list.append(["/services/light/turn_on","light.living_room"])
         return command_list
     def uaochul(self):
         command_list = []
-        command_list.append("외출모드를 실행합니다.")
-        command_list.append("전등을 킵니다.")
-        command_list.append("청소기를 킵니다.")
+        command_list.append(["/services/light/turn_off","light.living_room"])
         return command_list
 
     def word_dic(self, body):
@@ -64,7 +58,7 @@ class word_class:
                 },
                 ('외출', 'NNP'): {
                     ('실행', 'NNP'): {
-                        "functions": self.sumeon(),
+                        "functions": self.uaochul(),
                         "message": "외출모드를 실행합니다.",
                         "type": "모드실행"
                     }
